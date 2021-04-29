@@ -1,0 +1,22 @@
+{
+  "name": "praktika_4_sensors",
+  "version": "1.0.0",
+  "description": "praktika_4_sensors, Eduard Mazur EDTR63 182733 ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edruzam/praktika_4_sensors.git"
+  },
+  "author": "Eduard Mazur",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/edruzam/praktika_4_sensors/issues"
+  },
+  "homepage": "https://github.com/edruzam/praktika_4_sensors#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
