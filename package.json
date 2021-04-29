@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/edruzam/praktika_4_sensors#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg-promise": "^10.10.1"
   }
 }

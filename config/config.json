@@ -1,0 +1,7 @@
+{
+    "host": "dev.vk.edu.ee",
+    "port": "5432",
+    "dbname": "dbhitsa2019",
+    "username": "ruuvi_sel",
+    "password": "ruuvisel"
+}
