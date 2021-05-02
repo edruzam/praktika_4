@@ -87,7 +87,7 @@ module.exports = function (app) {
 	    "    ON c1.id=datasensor.id_controllersensor " +
         "INNER JOIN typevalue ON typevalue.id=datasensor.id_typevalue " +
         "WHERE c1.room=44::varchar AND datasensor.date_time::date = CURRENT_DATE + 0 " +
-        "ORDER BY datasensor.date_time ASC"
+        "ORDER BY datasensor.date_time DESC"
         )
         .then(function (data) {
             res.json({
