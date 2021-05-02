@@ -81,10 +81,12 @@ module.exports = function (app) {
     // Näidata auditooriumi nr 44 andurite andmeid täna
     app.get("/api/room44today", function (req, res) {
         db.any(
-        "SELECT datasensor.date_time, datasensor.data, typevalue.dimension, controller_sensor.room FROM datasensor " +
-        "INNER JOIN controller_sensor ON controller_sensor.id=datasensor.id_controllersensor " +
+        "SELECT datasensor.date_time, datasensor.data, typevalue.dimension, typevalue.valuetype, c1.sensorname, c1.room FROM datasensor " +
+        "INNER JOIN (SELECT controller_sensor.id, controller_sensor.room, sensor.sensorname FROM controller_sensor " +
+		"               INNER JOIN sensor ON sensor.id=controller_sensor.id_sensor) c1 " +
+	    "    ON c1.id=datasensor.id_controllersensor " +
         "INNER JOIN typevalue ON typevalue.id=datasensor.id_typevalue " +
-        "WHERE controller_sensor.room=44:: varchar AND datasensor.date_time::date = CURRENT_DATE + 0" +
+        "WHERE c1.room=44::varchar AND datasensor.date_time::date = CURRENT_DATE + 0 " +
         "ORDER BY datasensor.date_time ASC"
         )
         .then(function (data) {
