@@ -44,6 +44,27 @@ module.exports = function (app) {
         });
     });
 
+    app.get("/api/room/:number/sensors-with-last-data", function (req, res) {
+        db.any(
+        "SELECT distinct on (datasensor.id_controllersensor) datasensor.id, datasensor.date_time, datasensor.data, typevalue.dimension, typevalue.valuetype, c1.sensorname, c1.room FROM datasensor " +
+        "INNER JOIN (SELECT controller_sensor.id, controller_sensor.room, sensor.sensorname FROM controller_sensor " +
+		"               INNER JOIN sensor ON sensor.id=controller_sensor.id_sensor) c1 " +
+	    "    ON c1.id=datasensor.id_controllersensor " +
+        "INNER JOIN typevalue ON typevalue.id=datasensor.id_typevalue " +
+        "WHERE c1.room=" + req.params.number + "::varchar " +
+        "ORDER BY datasensor.id_controllersensor, datasensor.date_time DESC"
+        )
+        .then(function (data) {
+            res.json({
+                status: "success",
+                data: data,
+            });
+        })
+        .catch(function (err) {
+            return next(err);
+        });
+    });
+
     // Näidata, millised kontrollerid on andmebaasis
     app.get("/api/controllers", function (req, res) {
         db.any("SELECT DISTINCT controller FROM controller")
